@@ -195,14 +195,18 @@ Distance computePerimeter(const Face& face, const Vertices& vertices) {
     Index* indices = face.indices;
 
     auto i = 0;
-    while (i < face.numIndices - 1) {
-        auto p = transform(vertices[indices[i]]);
-        auto q = transform(vertices[indices[++i]]);
-        perimeter += distance(p, q);
-    }
-
     auto p = transform(vertices[indices[i]]);
-    auto q = transform(vertices[indices[0]]);
+    auto q = transform(vertices[indices[++i]]);
+    perimeter += distance(p, q);
+
+
+    p = transform(vertices[indices[i]]);
+    q = transform(vertices[indices[++i]]);
+    perimeter += distance(p, q);
+
+    
+    p = transform(vertices[indices[i]]);
+    q = transform(vertices[indices[0]]);
     perimeter += distance(p, q);
 
     return perimeter;
